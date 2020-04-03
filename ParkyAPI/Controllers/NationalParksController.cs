@@ -37,5 +37,10 @@ namespace ParkyAPI.Controllers
 
             return Ok(objDto);
         }
+
+        private NationalParkDto convertToDto(NationalPark park)
+        {
+            return _mapper.Map<NationalParkDto>(park);
+        }
     }
 }
