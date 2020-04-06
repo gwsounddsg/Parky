@@ -32,13 +32,26 @@ namespace ParkyAPI.Controllers
 
             foreach (var obj in objList)
             {
-                objDto.Add(convertToDto(obj));
+                objDto.Add(ConvertToDto(obj));
             }
 
             return Ok(objDto);
         }
 
-        private NationalParkDto convertToDto(NationalPark park)
+        [HttpGet("{id:int}")]
+        public IActionResult GetNationalPark(int id)
+        {
+            var park = _npRepo.GetNationalPark(id);
+
+            if (park == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(ConvertToDto(park));
+        }
+
+        private NationalParkDto ConvertToDto(NationalPark park)
         {
             return _mapper.Map<NationalParkDto>(park);
         }
